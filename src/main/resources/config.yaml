@@ -1,16 +1,16 @@
 browser:
   browserName: chrome
   headlessBrowser: false
-  webElementTimeOut: 15
+  webElementTimeOut: 20
 
 environment:
   test1:
     active: true
     envName: test1
     appUrl: http://automationpractice.com/
-    eTitle: Selenium
+    eTitle: My Store
   test2:
     active: false
     envName: test2
     appUrl: http://automationpractice.com/
-    eTitle: Selenium
+    eTitle: My Store

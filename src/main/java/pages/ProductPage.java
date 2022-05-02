@@ -1,12 +1,17 @@
 package pages;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProductPage extends BasePage{
     public ProductPage(WebDriver driver) {
         super(driver);
     }
+
+    Logger log = LoggerFactory.getLogger("ProductPage.class");
 
     @FindBy(css = "#bigpic")
     private WebElement bigPicture;
@@ -34,5 +39,13 @@ public class ProductPage extends BasePage{
 
     public WebElement getSmallPicture3() {
         return smallPicture3;
+    }
+
+    public void compareWithMiniature(WebElement bigPicture, WebElement miniature){
+        String srcBeforeHover = bigPicture.getAttribute("src");
+        mouseHover(miniature);
+        String srcAfterHover = bigPicture.getAttribute("src");
+        Assert.assertNotEquals(srcBeforeHover, srcAfterHover);
+        log.info("**** Big picture was correctly changed after hover on miniature *****");
     }
 }
