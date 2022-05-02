@@ -3,7 +3,7 @@ import pages.BlousesPage;
 import pages.HomePage;
 import pages.ProductPage;
 
-public class AutomationPractiseTest extends TestBase {
+public class AutomationPracticeTest extends TestBase {
     protected HomePage homePage;
     protected BlousesPage blousesPage;
     protected ProductPage productPage;
