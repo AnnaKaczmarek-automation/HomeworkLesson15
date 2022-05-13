@@ -1,10 +1,12 @@
 package pages;
-import org.junit.Assert;
+import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class ProductPage extends BasePage{
     public ProductPage(WebDriver driver) {
@@ -16,36 +18,25 @@ public class ProductPage extends BasePage{
     @FindBy(css = "#bigpic")
     private WebElement bigPicture;
 
-    @FindBy(css = "#thumb_5")
-    private WebElement smallPicture1;
-
-    @FindBy(css = "#thumb_6")
-    private WebElement smallPicture2;
-
-    @FindBy(css = "#thumb_7")
-    private WebElement smallPicture3;
+    @FindBy(css = "#thumbs_list_frame li")
+    private List<WebElement> miniatureList;
 
     public WebElement getBigPicture() {
-        return bigPicture;
+        return  bigPicture;
     }
 
-     public WebElement getSmallPicture1() {
-        return smallPicture1;
-    }
+    public void compareWithMiniature(WebElement bigPicture){
 
-    public WebElement getSmallPicture2() {
-        return smallPicture2;
-    }
-
-    public WebElement getSmallPicture3() {
-        return smallPicture3;
-    }
-
-    public void compareWithMiniature(WebElement bigPicture, WebElement miniature){
-        String srcBeforeHover = bigPicture.getAttribute("src");
-        mouseHover(miniature);
-        String srcAfterHover = bigPicture.getAttribute("src");
-        Assert.assertNotEquals(srcBeforeHover, srcAfterHover);
+        SoftAssertions softAssertions = new SoftAssertions();
+        for (WebElement miniature : miniatureList) {
+            String srcBeforeHover = bigPicture.getAttribute("src");
+            mouseHover(miniature);
+            String srcAfterHover = bigPicture.getAttribute("src");
+            softAssertions.assertThat(srcAfterHover).isNotEqualTo(srcBeforeHover);
+        }
+        softAssertions.assertAll();
         log.info("**** Big picture was correctly changed after hover on miniature *****");
     }
+
+
 }

@@ -16,8 +16,7 @@ public class AutomationPracticeTest extends TestBase {
 
         homePage.openBlouseCategory();
         blousesPage.openBlousesProductPage();
-        productPage.compareWithMiniature(productPage.getBigPicture(),productPage.getSmallPicture1());
-        productPage.compareWithMiniature(productPage.getBigPicture(),productPage.getSmallPicture2());
-        productPage.compareWithMiniature(productPage.getBigPicture(),productPage.getSmallPicture3());
+        productPage.compareWithMiniature(productPage.getBigPicture());
+
     }
 }
